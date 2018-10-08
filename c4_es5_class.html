@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+// es5 里面的类
+        function Person(){
+            this.name = '张三';
+            this.age = 20;
+
+            this.run = function(){  // 这些方法都叫实例方法, new实例后才能调用
+                alert(this.name + '在运动');
+            }
+        }
+        
+        // 原型链中增加属性和方法
+        // 注意! 原型链上的属性会被多个实例共享, 构造函数不会
+        Person.prototype.sex = '男';
+        Person.prototype.work = function(){
+            alert(this.name + '在工作');
+        }
+        
+        // // 静态方法(注意和实例方法区分)
+        // Person.getInfo = function(){
+        //     alert('我是静态方法');
+        // }
+        
+
+        var p = new Person();
+        // alert(p.name);
+        // p.run();
+        // p.work();
+
+        // 调用静态方法
+        Person.getInfo();
+
+// es5 里面的继承
+        // web类, 继承Person类, 原型链 + 对象冒充的组合继承模式
+        // function Web(){
+        //     Person.call(this);  // 对象冒充实现继承
+        // }
+        // var w = new Web();
+        // w.run();  // 对象冒充可以继承构造函数里面的属性和方法, 但是没法继承原型链上面的属性和方法
+        // // w.work(); // 报错
+
+        // 原型链实现继承, 问题是实例化子类的时候, 没法给父类传参
+        function Web(){
+
+        }
+        web.prototype = new Person();
+        var w = new Web();
+        w.run();
+        w.work();   // 原型链继承, 既可以继承构造函数里面的属性和方法, 也可以继承原型链上面的属性和方法
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
